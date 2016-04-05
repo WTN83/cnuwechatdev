@@ -30,16 +30,19 @@
 关于LaneWeChat：
 >框架简介：为快速开发微信应用而生的PHP框架。将微信的开发者功能根据文档进行了封装。  
 开发语言：PHP  
-版本要求：原则PHP5.3以上
-版本规避：若版本低于PHP5.3，则删除本框架所有页面开头“namespace”的行、删除本框架中所有的“use LaneWeChat”开头的行，删除“LaneWeChat\Core”，修改Autoloader::NAMESPACE_PREFIX=''，修改curl.lib.php的\Exception为Exception即可。
-命名空间：本框架的命名空间均为LaneWeChat开头。
-开源协议：Do What The Fuck You Want To Public License
-开发者博客：http://www.lanecn.com
+版本要求：原则PHP5.3以上  
+版本规避：若版本低于PHP5.3，则删除本框架所有页面开头“namespace”的行、删除本框架中所有的“use LaneWeChat”开头的行，删除“LaneWeChat\Core”，修改Autoloader::NAMESPACE_PREFIX=''，修改curl.lib.php的\Exception为Exception即可。  
+命名空间：本框架的命名空间均为LaneWeChat开头。  
+开源协议：Do What The Fuck You Want To Public License  
+开发者博客：http://www.lanecn.com  
 文档地址：<a href="http://lanewechat.lanecn.com/">http://lanewechat.lanecn.com/</a>
 
+
+---
 **本项目根据实际开发情况对该框架部分已封装功能进行了重写，并对部分命名模糊的方法名称作出了修改。  
-本项目实际版本要求为:PHP5.6以上**
-开源协议: Do What The Fuck You Want To Public License
+本项目实际版本要求为:PHP5.6以上**  
+开源协议: Do What The Fuck You Want To Public License  
+本项目地址：<a href="https://github.com/WTN83/cnuwechatdev">https://github.com/WTN83/cnuwechatdev</a>
 ###常识普及
 	微信公众账号分两种，一种是订阅号，一种是服务号。
 	1、订阅号是被动响应用户消息功能，并且每天推送一条消息。
