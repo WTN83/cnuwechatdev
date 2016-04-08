@@ -133,7 +133,43 @@ class WechatRequest{
      */
     public static function text(&$request){
         // $content = IntelligentInterface::semanticSemproxy($request['content'],$category='nearby',$request['fromusername'],$request['location_x'],$request['location_y']);
-        $content='收到您的消息';
+        // $content='收到您的消息';
+        $keyword = $request['content'];
+        if(mb_substr($keyword, 3 , 2 , 'utf-8') == '天气'){
+            $cityname=urlencode((mb_substr($keyword,0,2,'utf-8')));
+            // $cityname=(mb_substr($keyword,0,2,'utf-8'));
+            $apiurl='http://v.juhe.cn/weather/index?format=2&cityname='.$cityname.'&key=2aac98d57e6c0100100b3301d70bb0c5';
+            $result=Curl::callWebServer($apiurl,'','GET');
+            $code = $result['resultcode'];
+            $curtemp='当前温度：'.$result['result']['sk']['temp'].'℃';
+            $wind_direction='当前风向：'.$result['result']['sk']['wind_direction'];
+            $wind_strength='当前风力：'.$result['result']['sk']['wind_strength'];
+            $humidity='湿度：'.$result['result']['sk']['humidity'];
+            $todaytemp='今日温度：'.$result['result']['today']['temperature'];
+            $weather='今日天气：'.$result['result']['today']['weather'];
+            // $pm25='空气指数：'.$result['result']['today']['weather_id']['fb'];
+            $queryresult = $code."\n".$curtemp."\n".$wind_direction."\n".$wind_strength."\n".$humidity."\n".$todaytemp."\n".$weather;
+            // $queryresult = $cityname;
+
+        }
+        else if(mb_substr($keyword, 0, 4 , 'utf-8') == '快递查询'){
+            $company = mb_substr($keyword, 5 , 2 , 'utf-8');
+            $no = mb_substr($keyword, 8 , NULL,'utf-8');
+            // $no='227808608187';
+            // $comno = 'sto';
+            $comno = ResponsePassive::deliverySwitch($company);
+            $apiurl='http://v.juhe.cn/exp/index?key=f38d4f786a84259ade1a8d6eb27ad68f&com='.$comno.'&no='.$no;
+            $delivery = Curl::callWebServer($apiurl,'','GET');
+            $resultarray = json_encode($delivery['result']['list'],JSON_UNESCAPED_UNICODE);
+            // $resultarray =$delivery['result']['list'];
+            // foreach($resultarray()[] as $value){
+            //     $resultlist = $resultlist.$value."\n";
+            // }
+                // $queryresult = $resultlist;
+            $queryresult = $resultarray;
+
+        }
+        $content = $queryresult;
         return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
     }
 
@@ -219,7 +255,7 @@ class WechatRequest{
      * @return array
      */
     public static function eventSubscribe(&$request){
-        $content = '听说你关注了我';
+        $content = '欢迎关注XXX生活服务小助手，回复 “城市 天气” 可查询天气，回复“快递查询 快递公司 快递单号”可查询快递流转信息';
         return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
     }
 
@@ -270,9 +306,9 @@ class WechatRequest{
      */
     public static function eventClick(&$request){
 		//获取该分类的信息
-        $eventKey = $request['eventkey'];
-        $content = '收到点击菜单事件，您设置的key是' . $eventKey;
-        return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
+        // $eventKey = $request['eventkey'];
+        // $content = '收到点击菜单事件，您设置的key是' . $eventKey;
+        return ResponsePassive::forwardToCustomService($request['fromusername'], $request['tousername']);
     }
 
     /**

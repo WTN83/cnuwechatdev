@@ -18,13 +18,13 @@ define('LANEWECHAT_VERSION_DATE', '2014-11-05');
  */
 define("WECHAT_URL", 'http://www.lanecn.com');
 define('WECHAT_TOKEN', 'weixin');
-define('ENCODING_AES_KEY', "MqAuKoex6FyT5No0OcpRyCicThGs0P1vz4mJ2gwvvkF");
+define('ENCODING_AES_KEY', "cUW8ON4OTVDMAmCQPINNfT1eVssvlqkg0hwtqtnpoCP");
 
 /*
  * 开发者配置
  */
-define("WECHAT_APPID", 'wx5d57f64bb4804d90');
-define("WECHAT_APPSECRET", '4b1fa6d9442351ec9268eff05e38f521');
+define("WECHAT_APPID", 'wxcb2cd2dba2462424');
+define("WECHAT_APPSECRET", '606002de0b3f10ea08fae2612a573b9f');
 
 
 //-----引入系统所需类库-------------------

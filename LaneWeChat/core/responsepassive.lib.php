@@ -212,4 +212,50 @@ XML;
 XML;
         return sprintf($template, $fromusername, $tousername, time());
     }
+
+    // 快递查询方法
+    public static function deliverySwitch($company){
+         switch ($company) {
+                case '顺丰':
+                    $comno = 'sf';
+                    break;
+                case '申通':
+                    $comno = 'sto';
+                    break;
+                case '圆通':
+                    $comno = 'yt';
+                    break;
+                case '韵达':
+                    $comno = 'yd';
+                    break;
+                case '天天':
+                    $comno = 'tt';
+                    break;
+                case 'EM':
+                    $comno = 'ems';
+                    break;
+                case '中通':
+                    $comno = 'zto';
+                    break;
+                case '汇通':
+                    $comno = 'ht';
+                    break;    
+                default:
+                    $content = '不支持的快递公司~';
+                   return self::text($request['fromusername'], $request['tousername'], $content);
+                    break;
+            }
+            return $comno;
+    }
+
+    // public static function queryDelivery($comno,$no){
+
+            
+    //         $apiurl='http://v.juhe.cn/exp/index?key=f38d4f786a84259ade1a8d6eb27ad68f&com='.$comno.'&no='.$no;
+    //         $delivery = Curl::callWebServer($apiurl,'','GET');
+    //         $queryresult = $delivery['result']['list'];
+
+    //         return $queryresult;
+    // }
+
 }
